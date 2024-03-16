@@ -1,9 +1,21 @@
 {
   "nav": {
-    "item1": "КОМПАНИЯ",
-    "item2": "УСЛУГИ",
-    "item3": "СПРАВКА",
+    "products": "КОМПАНИЯ",
+    "about": "УСЛУГИ",
+    "search": "СПРАВКА",
     "login": "ЛОГИН",
     "shopping_cart": "КОРЗИНА"
+  },
+  "route": {
+    "home": "home",
+    "products": "products",
+    "about": "about",
+    "login": "login"
+  },
+  "route_result": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "login": "Login"
   }
 }

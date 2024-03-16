@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Outlet, Link } from 'react-router-dom'
 import logo from '../assets/logo-high-res.svg'
 import cartIcon from '../assets/shopping_cart.svg'
 import { EN, ET, RU } from '../lang/lang'
@@ -21,6 +22,10 @@ const Navbar = ({ config }) => {
     }
 
     const menuItem = (title, id) => {
+        const isLink = typeof id !== 'number';
+        console.log(
+            title, typeof id
+        )
         return <li className={`${menuSelected === id ? 'item-selected' : ''}`}
             onClick={(e) => {
                 setMenuSelected(id);
@@ -32,18 +37,18 @@ const Navbar = ({ config }) => {
             onMouseLeave={(e) => {
                 setMenu('');
             }}>
-            {title}{returnMenuHr(id)}
+            {isLink ? (<Link to={'/' + id}>{title}{returnMenuHr(id)}</Link>) : <>{title}{returnMenuHr(id)}</>}
         </li>
     }
 
     const menuItemsArray = [
-        { key: 0, value: (id) => menuItem(lang['nav']['item1'], id) },
-        { key: 1, value: (id) => menuItem(lang['nav']['item2'], id) },
-        { key: 2, value: (id) => menuItem(lang['nav']['item3'], id) },
+        { key: lang['route']['products'], element: (id) => menuItem(lang['nav']['products'], id) },
+        { key: lang['route']['about'], element: (id) => menuItem(lang['nav']['about'], id) },
+        { key: 0, element: (id) => menuItem(lang['nav']['search'], id) },
     ]
 
     return (
-        <div>
+        <nav>
             <div className="navbar">
                 <div className="nav-logo">
                     <a href='/'>
@@ -52,11 +57,14 @@ const Navbar = ({ config }) => {
                 </div>
                 <ul className="nav-menu">
                     {menuItemsArray.map(item => {
-                        return item.value(item.key);
+                        return item.element(item.key);
                     })}
                 </ul>
                 <div className="nav-login-cart">
-                    <button className='btn-outline'><img src='https://www.trumpit.ee/img/icon_lock.png' style={{ width: '12px', height: '12px' }} /> {lang['nav']['login']}</button>
+                    <Link onClick={(e) => {
+                        setMenuSelected(-1);
+                        setMenu('');
+                    }} to={lang['route']['login']} className='btn-outline'><img src='https://www.trumpit.ee/img/icon_lock.png' style={{ width: '12px', height: '12px' }} /> {lang['nav']['login']}</Link>
                     {/* <button className='btn-fill' onClick={(e) => setCount(prevCount => prevCount + 1)}>{lang['nav']['shopping_cart']}</button> */}
                     <div className='login-cart-container' onClick={(e) => setCount(prevCount => prevCount + 1)}>
                         <img className='btn-cart' src={cartIcon} />
@@ -68,7 +76,7 @@ const Navbar = ({ config }) => {
                     </div>
                 </div>
             </div>
-        </div >
+        </nav >
     );
 }
 

@@ -24,7 +24,14 @@
   cursor: pointer;
 }
 
-.nav-menu .item-selected {
+.nav-menu,
+.nav-menu a {
+  color: var(--nav-text-color);
+  text-decoration: none;
+}
+
+.nav-menu .item-selected,
+.nav-menu .item-selected > a {
   color: var(--primary-color);
 }
 
@@ -64,10 +71,15 @@
   gap: 20px;
 }
 
-.nav-login-cart button {
+.nav-login-cart button,
+.nav-login-cart a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-left: 20px;
   padding-right: 20px;
   height: 35px;
+  text-decoration: none;
   outline: none;
   border: none;
   border-radius: 20px;

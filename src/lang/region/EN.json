@@ -1,9 +1,21 @@
 {
   "nav": {
-    "item1": "PRODUCTS",
-    "item2": "ABOUT",
-    "item3": "SEARCH",
+    "products": "PRODUCTS",
+    "about": "ABOUT",
+    "search": "SEARCH",
     "login": "LOGIN",
     "shopping_cart": "SHOPPING CART"
+  },
+  "route": {
+    "home": "home",
+    "products": "products",
+    "about": "about",
+    "login": "login"
+  },
+  "route_result": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "login": "Login"
   }
 }

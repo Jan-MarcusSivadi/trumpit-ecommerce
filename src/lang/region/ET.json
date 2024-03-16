@@ -1,9 +1,21 @@
 {
   "nav": {
-    "item1": "PRODUKTID",
-    "item2": "MEIST",
-    "item3": "OTSI",
+    "products": "PRODUKTID",
+    "about": "MEIST",
+    "search": "OTSI",
     "login": "SISENE",
     "shopping_cart": "OSTUKORV"
+  },
+  "route": {
+    "home": "kodu",
+    "products": "produktid",
+    "about": "meist",
+    "login": "sisene"
+  },
+  "route_result": {
+    "home": "Kodu",
+    "products": "Produktid",
+    "about": "Meist",
+    "login": "Sisene"
   }
 }
