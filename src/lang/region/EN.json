@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "item1": "PRODUCTS",
+    "item2": "ABOUT",
+    "item3": "SEARCH",
+    "login": "LOGIN",
+    "shopping_cart": "SHOPPING CART"
+  }
+}

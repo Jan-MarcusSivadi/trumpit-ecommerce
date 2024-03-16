@@ -7,6 +7,19 @@
   -webkit-user-drag: none;
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+
+  --primary-color: #05aced;
+  --primary-active-color: #0d95e4;
+
+  --secondary-color: #fff;
+  --secondary-active-color: #f3f3f3;
+
+  --body-bg-color: #f0f0f0;
+  --nav-bg-color: #fff;
+  --nav-hover-color: #a3a3a3;
+  --nav-text-color: #515151;
+  --nav-text-active-color: #f3f3f3;
+  --cart-count-bubble-color: #ff2600;
 }
 
 body {
@@ -16,104 +29,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0f0f0;
+  background-color: var(--body-bg-color);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  padding: 16px;
-  background-color: #fff;
-  /* box-shadow: 0 1px 15px 0px rgba(0, 0, 0, 0.082); */
-}
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  gap: 35px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.nav-menu li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* gap: 3px; */
-  cursor: pointer;
-}
-
-.nav-menu hr {
-  border: none;
-  width: 100%;
-  border-bottom: 3px solid #05aced;
-  /* outline: 2px solid #05aced; */
-  /* height: 3px; */
-  /* border-radius: 10px; */
-  /* color: #05aced; */
-}
-
-.nav-login-cart {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-login-cart button {
-  width: 110px;
-  height: 35px;
-  outline: none;
-  border: none;
-  border-radius: 20px;
-  color: #515151;
-  font-size: 14px;
-  font-weight: 500;
-  background: white;
-  cursor: pointer;
-}
-
-.nav-login-cart .btn-outline {
-  border: 1px solid #7a7a7a;
-}
-.nav-login-cart .btn-outline:active {
-  background: #f3f3f3;
-}
-
-.nav-login-cart .btn-fill {
-  background: #05aced;
-  color: #fff;
-}
-.nav-login-cart .btn-fill:active {
-  background: #0d95e4;
-}
-
-.btn-cart {
-  cursor: pointer;
-}
-
-.nav-login-cart img {
-  /* width: 32px;
-  height: 32px; */
-}
-
-.nav-cart-count {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -32px;
-  margin-left: -28px;
-  border-radius: 50%;
-  font-size: 14px;
-  font-weight: 600;
-  background: #ff2600;
-  color: white;
 }
