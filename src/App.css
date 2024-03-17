@@ -15,7 +15,7 @@ hr {
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 16px 64px;
+  padding: 32px 64px;
   background-color: var(--secondary-color);
   width: 1280px;
   /* max-width: 900px; */
@@ -184,7 +184,8 @@ hr {
 
 .container {
   padding: 40px 70px;
-  height: calc(100vh - 71px);
+  /* height: calc(100vh - 71px); */
+  height: calc(100vh - 103px);
   color: var(--nav-text-color);
   background-color: var(--secondary-color);
   width: 1280px;

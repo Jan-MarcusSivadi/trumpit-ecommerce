@@ -49,7 +49,7 @@ const Navbar = ({ config }) => {
         <nav className='navbar-container'>
             <div className="navbar">
                 <div className="nav-logo">
-                    <Link to={'/'}>
+                    <Link to={lang['route']['home']}>
                         <img src={logo} alt="logo" />
                     </Link>
                 </div>

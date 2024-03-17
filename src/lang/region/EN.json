@@ -7,10 +7,10 @@
     "shopping_cart": "SHOPPING CART"
   },
   "route": {
-    "home": "home",
-    "products": "products",
-    "about": "about",
-    "login": "login"
+    "home": "en",
+    "products": "en/products",
+    "about": "en/about",
+    "login": "en/login"
   },
   "route_result": {
     "home": "Home",

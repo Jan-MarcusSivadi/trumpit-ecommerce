@@ -7,10 +7,10 @@
     "shopping_cart": "OSTUKORV"
   },
   "route": {
-    "home": "kodu",
-    "products": "produktid",
-    "about": "meist",
-    "login": "sisene"
+    "home": "et",
+    "products": "et/produktid",
+    "about": "et/meist",
+    "login": "et/sisene"
   },
   "route_result": {
     "home": "Kodu",

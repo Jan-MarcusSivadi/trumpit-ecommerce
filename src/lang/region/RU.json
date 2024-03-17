@@ -7,10 +7,10 @@
     "shopping_cart": "КОРЗИНА"
   },
   "route": {
-    "home": "home",
-    "products": "products",
-    "about": "about",
-    "login": "login"
+    "home": "ru",
+    "products": "ru/products",
+    "about": "ru/about",
+    "login": "ru/login"
   },
   "route_result": {
     "home": "Home",

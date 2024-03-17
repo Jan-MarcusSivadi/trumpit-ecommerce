@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import './App.css';
 import { EN, ET, RU } from './lang/lang'
 import Navbar from './components/Navbar';
@@ -57,18 +57,39 @@ const jsonToObjArray = (array, sortingArr, excludeArray) => {
   return fields
 }
 
+// const { param1, param2 } = Object.fromEntries(new URLSearchParams(location.search));
+// console.log("YES!!!", param1, param2);
+
 const App = () => {
-  const [lang, setLang] = useState(EN);
+  const [lang, setLang] = useState(ET);
   const [products, setProducts] = useState(productsData);
+
+  const location = useLocation();
+  const { hash, pathname, search } = location;
+
+  const navigate = useNavigate()
 
   const config = { lang, setLang, products, setProducts };
 
   useEffect(() => {
-    // setLang(EN);
-    if (products && products.length > 0) {
-      // console.log(products.map(prod => prod['fields']))
+    // if (products && products.length > 0) {
+    //   // console.log(products.map(prod => prod['fields']))
+    // }
+    if (pathname) {
+      if (pathname.includes('/et')) {
+        console.log('et', pathname)
+        setLang(ET);
+      } else if (pathname.includes('/en')) {
+        setLang(EN);
+        console.log('en', pathname)
+      } else if (pathname.includes('/ru')) {
+        setLang(RU);
+        console.log('ru', pathname)
+      } else {
+        navigate(lang['route']['home'], { replace: true })
+      }
     }
-  }, [])
+  }, [pathname])
 
   const HomePage = () => {
     return (
@@ -122,19 +143,19 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
+    <>
       <Navbar config={config} />
       <div className='container-main'>
         <div className='container'>
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path={'/' + lang['route']['home']} element={<ProductsPage config={config} />} />
             <Route path={'/' + lang['route']['products']} element={<ProductsPage config={config} />} />
             <Route path={'/' + lang['route']['about']} element={<AboutPage />} />
             <Route path={'/' + lang['route']['login']} element={<LoginPage />} />
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </>
   )
 }
 
