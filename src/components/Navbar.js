@@ -24,7 +24,7 @@ const Navbar = ({ config }) => {
     const menuItem = (title, id, key) => {
         const isLink = typeof id !== 'number';
 
-        return <li key={key} className={`${(isLink && menuSelected === id) ? 'item-selected' : ''}`}
+        return <li key={key} className={`${(isLink && menuSelected === id) ? 'item-selected' : (menu === id ? 'item-select' : '')}`}
             onClick={(e) => {
                 setMenuSelected(id);
                 setMenu('');

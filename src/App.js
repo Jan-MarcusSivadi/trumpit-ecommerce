@@ -105,40 +105,59 @@ const App = () => {
     const { products, setProducts } = config;
 
     return (
-      <>
-        <h2>{lang['route_result']['products']}</h2>
-        <div>
-          <hr />
+      <div className='product-list-container'>
+        <h2 className='page-title'>{lang['route_result']['products']}</h2>
+        <hr />
+        <div className='product-list'>
           {products && products.length > 0 ? products.map((product) => {
-            const json = product['fields'];
-            const fieldQuery = ['Product code'];
-            const fields = jsonToObjArray(json, fieldQuery);
+            const json1 = product['details'];
+            const images = product['images'];
+            const fieldQuery = ['Name', 'Short name'];
+            const fields = jsonToObjArray(json1, fieldQuery);
+            // const images = jsonToObjArray(json2, []);
 
             return (
-              <div>
-                {fields.map((field, key) => {
-                  return (
-                    <div key={key} style={{ paddingBottom: '2px' }}>
-                      {/* {field.key}:<br /> */}
-                      {field.value}<br />
-                    </div>
-                  )
-                })}
+              <div className='product-card'>
+                <div className='product-container'>
+                  <div>
+                    <img src={images[0]}></img>
+                  </div>
+                  <div>
+                    <h4>{fields[0]?.value}</h4>
+                    <p>{fields[1]?.value}</p>
+                  </div>
+                </div>
               </div>
+              // <div>
+              //   {fields.map((field, key) => {
+              //     return (
+              //       <div key={key} style={{ paddingBottom: '2px' }}>
+              //         {/* {field.key}:<br /> */}
+              //         {/* {field.value}<br /> */}
+              //       </div>
+              //     )
+              //   })}
+              // </div>
             )
           }) : <h4>No Products :(</h4>}
         </div>
-      </>
+      </div>
     )
   }
   const AboutPage = () => {
     return (
-      <><h2>{lang['route_result']['about']}</h2></>
+      <>
+        <h2 className='page-title'>{lang['route_result']['about']}</h2>
+        <hr />
+      </>
     )
   }
   const LoginPage = () => {
     return (
-      <><h2>{lang['route_result']['login']}</h2></>
+      <>
+        <h2 className='page-title'>{lang['route_result']['login']}</h2>
+        <hr />
+      </>
     )
   }
 
