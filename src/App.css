@@ -1,3 +1,4 @@
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -151,6 +152,22 @@
 .nav-logo img {
   aspect-ratio: 1/1;
   height: 35px !important;
+}
+
+/* Main */
+.container-main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: var(--nav-text-color);
+}
+
+.container {
+  width: 100%;
+  max-width: 65vw;
+  height: calc(100vh - 71px);
+  color: var(--nav-text-color);
+  /* background-color: var(--body-bg-color); */
 }
 
 /* SHOPPING CART NAV BUTTON */

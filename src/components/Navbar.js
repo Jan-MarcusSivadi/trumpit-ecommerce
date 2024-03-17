@@ -21,12 +21,10 @@ const Navbar = ({ config }) => {
         return count > 9 ? '9+' : count;
     }
 
-    const menuItem = (title, id) => {
+    const menuItem = (title, id, key) => {
         const isLink = typeof id !== 'number';
-        console.log(
-            title, typeof id
-        )
-        return <li className={`${menuSelected === id ? 'item-selected' : ''}`}
+
+        return <li key={key} className={`${(isLink && menuSelected === id) ? 'item-selected' : ''}`}
             onClick={(e) => {
                 setMenuSelected(id);
                 setMenu('');
@@ -37,27 +35,27 @@ const Navbar = ({ config }) => {
             onMouseLeave={(e) => {
                 setMenu('');
             }}>
-            {isLink ? (<Link to={'/' + id}>{title}{returnMenuHr(id)}</Link>) : <>{title}{returnMenuHr(id)}</>}
+            {isLink ? (<Link to={'/' + id}>{title}{returnMenuHr(id)}</Link>) : <>{title}</>}
         </li>
     }
 
     const menuItemsArray = [
-        { key: lang['route']['products'], element: (id) => menuItem(lang['nav']['products'], id) },
-        { key: lang['route']['about'], element: (id) => menuItem(lang['nav']['about'], id) },
-        { key: 0, element: (id) => menuItem(lang['nav']['search'], id) },
+        { key: lang['route']['products'], element: (id, key) => menuItem(lang['nav']['products'], id, key) },
+        { key: lang['route']['about'], element: (id, key) => menuItem(lang['nav']['about'], id, key) },
+        { key: 0, element: (id, key) => menuItem(lang['nav']['search'], id, key) },
     ]
 
     return (
         <nav>
             <div className="navbar">
                 <div className="nav-logo">
-                    <a href='/'>
+                    <Link to={'/'}>
                         <img src={logo} alt="logo" />
-                    </a>
+                    </Link>
                 </div>
                 <ul className="nav-menu">
-                    {menuItemsArray.map(item => {
-                        return item.element(item.key);
+                    {menuItemsArray.map((item, key) => {
+                        return item.element(item.key, key);
                     })}
                 </ul>
                 <div className="nav-login-cart">
