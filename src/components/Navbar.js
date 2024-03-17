@@ -46,7 +46,7 @@ const Navbar = ({ config }) => {
     ]
 
     return (
-        <nav>
+        <nav className='navbar-container'>
             <div className="navbar">
                 <div className="nav-logo">
                     <Link to={'/'}>
