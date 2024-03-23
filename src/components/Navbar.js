@@ -82,8 +82,6 @@ const Navbar = ({ config }) => {
         { route: getRouteKey('router.routes.device_repurchase'), element: (to, key) => routeElement(t('nav.device_repurchase'), to, key) },
         { route: getRouteKey('router.routes.maintenance'), element: (to, key) => routeElement(t('nav.maintenance'), to, key) },
         { route: getRouteKey('router.routes.rent'), element: (to, key) => routeElement(t('nav.rent'), to, key) },
-        // { route: '/', element: (uri, key) => <h1>{t('nav.home')}</h1> },
-        // { route: '/', element: (uri, key) => routeElement(lang['nav']['home'], uri, key) },
     ]
 
     return (

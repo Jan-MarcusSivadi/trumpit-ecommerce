@@ -163,14 +163,22 @@ const App = () => {
     console.log('hello!', pathname);
     if (globalRoutes) {
       const a = Object.keys(globalRoutes).map((key) => [key, globalRoutes[key]]);
-      let arr = [];
+      let routes = [];
       a.forEach((key) => {
         Object.keys(key[1]).forEach(k => {
-          arr.push({ key: k, value: key[1][k] });
+          routes.push({lang: key[0], key: k, value: key[1][k] });
         });
         // console.log(pathname.includes(key))
       });
-      console.log(arr);
+      console.log(routes);
+      const findRouteByPathnameResult = routes.find(r => pathname.includes(r.key) || pathname.includes(r.key.slice(0, r.key.length-1)));
+      if (findRouteByPathnameResult) {
+        const { lang, value } = findRouteByPathnameResult;
+        console.log('findRouteByPathname', lang, value);
+        i18n.changeLanguage(lang);
+      } else {
+        console.log('findRouteByPathname', '/');
+      }
     }
   }, [pathname])
 
@@ -234,9 +242,6 @@ const App = () => {
           <div className='container'>
             <Routes>
               <Route path='/' element={<HomePage config={config} />} />
-              {/* <Route path={'/' + routes['iphone']} element={<HomePage config={config} />} /> */}
-              {/* <Route path={'/' + routes['ipad']} element={<HomePage config={config} />} /> */}
-              {/* <Route path={'/' + lang['route']['login']} element={<LoginPage />} /> */}
             </Routes>
           </div>
         </div>
