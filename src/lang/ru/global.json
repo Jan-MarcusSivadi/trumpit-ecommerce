@@ -1,0 +1,44 @@
+{
+  "id": "ru",
+  "nav": {
+    "home": "Avaleht",
+    "iphone": "iPhone",
+    "ipad": "iPad",
+    "mac": "Mac",
+    "watch": "Watch",
+    "other_devices": "Muud seadmed",
+    "accessories": "Lisavarustus",
+    "campaign": "Kampaania",
+    "device_repurchase": "Seadme tagasiost",
+    "maintenance": "Hooldus",
+    "rent": "Rent",
+    "products": "Products",
+    "about": "About us",
+    "search": "Search",
+    "login": "Login",
+    "shopping_cart": "Cart"
+  },
+  "router": {
+    "result": {
+      "home": "Home",
+      "products": "Products",
+      "about": "About",
+      "login": "Login"
+    },
+    "routes": {
+      "iphone": "product-cat/iphone-ru/",
+      "ipad": "product-cat/ipad-ru/",
+      "mac": "product-cat/mac-ru/",
+      "watch": "product-cat/watch-ru/",
+      "other_devices": "product-category/other-devices/",
+      "accessories": "product-cat/accessories/",
+      "campaign": "product-cat/campaign-products/",
+      "maintenance": "maintenance-and-repair-of-apple-devices/",
+      "device_repurchase": "device-repurchase/",
+      "rent": "apple-seadmete-rent/",
+      "products": "produktid",
+      "about": "meist",
+      "login": "sisene"
+    }
+  }
+}

@@ -1,80 +1,111 @@
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import logo from '../assets/logo-high-res.svg'
 import cartIcon from '../assets/shopping_cart.svg'
-import { EN, ET, RU } from '../lang/lang'
 
 const Navbar = ({ config }) => {
-    const { lang, setLang } = config;
+    const [t, i18n] = useTranslation("global");
 
-    const [count, setCount] = useState(0);
-    const [menu, setMenu] = useState("");
-    const [menuSelected, setMenuSelected] = useState(-1);
+    const [menuSelected, setMenuSelected] = useState("");
+    const [menuActive, setMenuActive] = useState(-1);
+
+    const { pathname, navigate } = config;
+
+    /* 
+    syncronize navigation menu 
+    with URL path
+    */
+    useEffect(() => {
+        const path = pathname.slice(1);
+        const found = routerMenu.find(r => r.route === path);
+        const fallbackPath = routerMenu[0].route;
+
+        if (found) {
+            if (menuActive !== found.route) setMenuActive(found.route);
+            return
+        } else {
+            setMenuActive(fallbackPath)
+        }
+    }, [pathname, menuActive]); // routes, pathname, menuActive
 
     const returnMenuHr = (string) => {
-        const menuHr = menu === string ? <div className='abs-container'><hr className={`hr-anim`} /></div> : <></>;
-        const menuSelectedHr = menuSelected === string ? <div className='abs-container'><hr className={`hr-anim2`} /></div> : <></>;
-        return (menu !== string ? menuSelectedHr : menuHr);
+        // <hr className={`hr-anim`} />
+        return (menuSelected === string || menuActive === string) ? (
+            <div className='abs-container'>
+                <hr className={`hr-anim2`} />
+            </div>
+        ) : <></>;
     };
 
-    const getCount = () => {
-        return count > 9 ? '9+' : count;
-    }
+    const routeElement = (title, to, key) => {
+        const isLink = typeof to !== 'number';
 
-    const menuItem = (title, id, key) => {
-        const isLink = typeof id !== 'number';
-
-        return <li key={key} className={`${(isLink && menuSelected === id) ? 'item-selected' : (menu === id ? 'item-select' : '')}`}
+        return to ? <Link to={to}
             onClick={(e) => {
-                setMenuSelected(id);
-                setMenu('');
+                setMenuActive(to);
+                setMenuSelected('');
             }}
             onMouseEnter={(e) => {
-                menuSelected !== id ? setMenu(id) : setMenu('');
+                menuActive !== to ? setMenuSelected(to) : setMenuSelected('');
             }}
             onMouseLeave={(e) => {
-                setMenu('');
+                setMenuSelected('');
             }}>
-            {isLink ? (<Link to={'/' + id}>{title}{returnMenuHr(id)}</Link>) : <>{title}</>}
-        </li>
+            <div>
+                <li key={key} className={`${(menuActive === to) ? 'item-selected' : (menuSelected === to ? 'item-select' : '')}`}>
+                    {isLink ? (<>{title}{returnMenuHr(to)}</>) : <>{title}</>}
+                </li>
+            </div>
+        </Link> : <></>
     }
 
-    const menuItemsArray = [
-        { key: lang['route']['products'], element: (id, key) => menuItem(lang['nav']['products'], id, key) },
-        { key: lang['route']['about'], element: (id, key) => menuItem(lang['nav']['about'], id, key) },
-        { key: 0, element: (id, key) => menuItem(lang['nav']['search'], id, key) },
+    const getRouteKey = (id) => {
+        // const result = t(id);
+        // return i18n.exists(id) ? t(id) : null;
+        const arr = id.split('.');
+        const navKey = arr[arr.length - 1];
+        const foundVal = i18n.getDataByLanguage(i18n.language)['global']['router']['routes'][navKey]
+        // console.log(id, foundVal)
+        return foundVal; // i18n.getFixedT('et', null, id); //i18n.exists(i18next.getFixedT(null, null, id));
+    }
+
+    const routerMenu = [
+        { route: '/', element: (to, key) => routeElement(t('nav.home'), to, key) },
+        { route: getRouteKey('router.routes.iphone'), element: (to, key) => routeElement(t('nav.iphone'), to, key) },
+        { route: getRouteKey('router.routes.ipad'), element: (to, key) => routeElement(t('nav.ipad'), to, key) },
+        { route: getRouteKey('router.routes.mac'), element: (to, key) => routeElement(t('nav.mac'), to, key) },
+        { route: getRouteKey('router.routes.watch'), element: (to, key) => routeElement(t('nav.watch'), to, key) },
+        { route: getRouteKey('router.routes.other_devices'), element: (to, key) => routeElement(t('nav.other_devices'), to, key) },
+        { route: getRouteKey('router.routes.accessories'), element: (to, key) => routeElement(t('nav.accessories'), to, key) },
+        { route: getRouteKey('router.routes.campaign'), element: (to, key) => routeElement(t('nav.campaign'), to, key) },
+        { route: getRouteKey('router.routes.device_repurchase'), element: (to, key) => routeElement(t('nav.device_repurchase'), to, key) },
+        { route: getRouteKey('router.routes.maintenance'), element: (to, key) => routeElement(t('nav.maintenance'), to, key) },
+        { route: getRouteKey('router.routes.rent'), element: (to, key) => routeElement(t('nav.rent'), to, key) },
+        // { route: '/', element: (uri, key) => <h1>{t('nav.home')}</h1> },
+        // { route: '/', element: (uri, key) => routeElement(lang['nav']['home'], uri, key) },
     ]
 
     return (
-        <nav className='navbar-container'>
-            <div className="navbar">
-                <div className="nav-logo">
-                    <Link to={lang['route']['home']}>
-                        <img src={logo} alt="logo" />
-                    </Link>
-                </div>
-                <ul className="nav-menu">
-                    {menuItemsArray.map((item, key) => {
-                        return item.element(item.key, key);
-                    })}
-                </ul>
-                <div className="nav-login-cart">
-                    <Link onClick={(e) => {
-                        setMenuSelected(-1);
-                        setMenu('');
-                    }} to={lang['route']['login']} className='btn-outline'><img src='https://www.trumpit.ee/img/icon_lock.png' style={{ width: '12px', height: '12px' }} /> {lang['nav']['login']}</Link>
-                    {/* <button className='btn-fill' onClick={(e) => setCount(prevCount => prevCount + 1)}>{lang['nav']['shopping_cart']}</button> */}
-                    <div className='login-cart-container' onClick={(e) => setCount(prevCount => prevCount + 1)}>
-                        <img className='btn-cart' src={cartIcon} />
-                        <div>
-                            {count > 0 && (
-                                <div className={`nav-cart-count ${count > 9 ? 'cart-count-max' : ''}`}>{getCount()}</div>
-                            )}
-                        </div>
+        <header>
+            <nav className='navbar-container'>
+                <div className="navbar">
+                    <div className="nav-logo">
+                        <Link to={'/'}>
+                            <img src='https://en.upgreat.ee/wp-content/uploads/2023/07/upgreat-logo-dark-green-transparent-1.svg' alt='UPGR8 OÜ' />
+                            {/* <img src={logo} alt="logo" /> */}
+                        </Link>
                     </div>
+                    <ul className="nav-menus">
+                        <div className='nav-menu'>
+                            {routerMenu.map((item, key) => {
+                                return item.element(item.route, key);
+                            })}
+                        </div>
+                    </ul>
                 </div>
-            </div>
-        </nav >
+            </nav >
+        </header>
     );
 }
 

@@ -1,0 +1,15 @@
+{
+  "iphone": "product-category/iphone-en",
+  "ipad": "product-category/ipad-en",
+  "mac": "product-category/mac-en",
+  "watch": "product-category/watch-en",
+  "other_devices": "product-category/other-devices",
+  "accessories": "product-category/accessories",
+  "campaign": "product-category/campaign-products",
+  "maintenance": "maintenance-and-repair-of-apple-devices",
+  "device_repurchase": "device-repurchase",
+  "rent": "apple-seadmete-rent",
+  "products": "produktid",
+  "about": "meist",
+  "login": "sisene"
+}

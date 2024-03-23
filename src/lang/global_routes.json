@@ -1,0 +1,37 @@
+{
+  "en": {
+    "product-category/iphone-en/": "iphone",
+    "product-category/ipad-en/": "ipad",
+    "product-category/mac-en/": "mac",
+    "product-category/watch-en/": "watch",
+    "product-category/other-devices/": "other_devices",
+    "product-category/accessories/": "accessories",
+    "product-category/campaign-products/": "campaign",
+    "maintenance-and-repair-of-apple-devices/": "maintenance",
+    "device-repurchase/": "device_repurchase",
+    "apple-seadmete-rent/": "rent"
+  },
+  "et": {
+    "toote-kategooria/iphone/": "iphone",
+    "toote-kategooria/ipad/": "ipad",
+    "toote-kategooria/mac/": "mac",
+    "toote-kategooria/watch/": "watch",
+    "toote-kategooria/other-devices/": "other_devices",
+    "toote-kategooria/accessories/": "accessories",
+    "maintenance-and-repair-of-apple-devices/": "maintenance",
+    "seadmete-tagasiost/": "device_repurchase",
+    "apple-seadmete-rent/": "rent"
+  },
+  "ru": {
+    "product-cat/iphone-ru/": "iphone",
+    "product-cat/ipad-ru/": "ipad",
+    "product-cat/mac-ru/": "mac",
+    "product-cat/watch-ru/": "watch",
+    "product-category/other-devices/": "other_devices",
+    "product-cat/accessories/": "accessories",
+    "product-cat/campaign-products/": "campaign",
+    "maintenance-and-repair-of-apple-devices/": "maintenance",
+    "device-repurchase/": "device_repurchase",
+    "apple-seadmete-rent/": "rent"
+  }
+}

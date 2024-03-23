@@ -1,0 +1,44 @@
+{
+  "id": "en",
+  "nav": {
+    "home": "Home",
+    "iphone": "iPhone",
+    "ipad": "iPad",
+    "mac": "Mac",
+    "watch": "Watch",
+    "other_devices": "Other Devices",
+    "accessories": "Accessories",
+    "campaign": "Campaign",
+    "device_repurchase": "Device repurchase",
+    "maintenance": "Maintenance",
+    "rent": "Rent",
+    "products": "Produktid",
+    "about": "Meist",
+    "search": "Otsi",
+    "login": "Sisene",
+    "shopping_cart": "Ostukorv"
+  },
+  "router": {
+    "result": {
+      "home": "Home",
+      "products": "Products",
+      "about": "About",
+      "login": "Login"
+    },
+    "routes": {
+      "iphone": "product-category/iphone-en/",
+      "ipad": "product-category/ipad-en/",
+      "mac": "product-category/mac-en/",
+      "watch": "product-category/watch-en/",
+      "other_devices": "product-category/other-devices/",
+      "accessories": "product-category/accessories/",
+      "campaign": "product-category/campaign-products/",
+      "maintenance": "maintenance-and-repair-of-apple-devices/",
+      "device_repurchase": "device-repurchase/",
+      "rent": "apple-seadmete-rent/",
+      "products": "produktid",
+      "about": "meist",
+      "login": "sisene"
+    }
+  }
+}

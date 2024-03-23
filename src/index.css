@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +12,16 @@
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 
-  --primary-color: #05aced;
+  --primary-color: #d0ee8f;
+  --primary-text-color: #102a26;
+  --primary-text-active-color: #102a263a;
   --primary-active-color: #0d95e4;
 
-  --secondary-color: #fff;
+  --secondary-color: #f3f3f5;
   --secondary-active-color: #f3f3f3;
+  /* --secondary-color: #f0f0f2; */
+  --nav-underline-active: #132a2698;
+  --nav-menu-color: #132a26;
 
   --body-bg-color: #f0f0f0;
   --nav-bg-color: #fff;
@@ -29,9 +36,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  font-family: "Mulish", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: var(--body-bg-color); */
+  background-color: var(--secondary-color);
 }
 
 code {

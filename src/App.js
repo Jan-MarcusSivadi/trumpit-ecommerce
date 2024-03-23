@@ -1,9 +1,14 @@
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import './App.css';
-import { EN, ET, RU } from './lang/lang'
+// import { EN, ET, RU } from './lang/lang'
 import Navbar from './components/Navbar';
 import productsData from './db/products.json'
+import routesJSON from './routes/routes'
+import { use } from "i18next";
+
+import globalRoutes from './lang/global_routes.json'
 
 const refSort = (targetData, refData) => {
   // Create an array of indices [0, 1, 2, ...N].
@@ -61,43 +66,119 @@ const jsonToObjArray = (array, sortingArr, excludeArray) => {
 // console.log("YES!!!", param1, param2);
 
 const App = () => {
-  const [lang, setLang] = useState(ET);
+  const [t, i18n] = useTranslation("global");
+  const [appLanguage, setAppLanguage] = useState(i18n.language)
+  // const [lang, setLang] = useState(EN);
   const [products, setProducts] = useState(productsData);
+  // const [routes, setRoutes] = useState({});
 
   const location = useLocation();
   const { hash, pathname, search } = location;
 
   const navigate = useNavigate()
 
-  const config = { lang, setLang, products, setProducts };
+  const config = { products, setProducts, pathname, navigate };
 
   useEffect(() => {
-    // if (products && products.length > 0) {
-    //   // console.log(products.map(prod => prod['fields']))
-    // }
-    if (pathname) {
-      if (pathname.includes('/et')) {
-        console.log('et', pathname)
-        setLang(ET);
-      } else if (pathname.includes('/en')) {
-        setLang(EN);
-        console.log('en', pathname)
-      } else if (pathname.includes('/ru')) {
-        setLang(RU);
-        console.log('ru', pathname)
-      } else {
-        navigate(lang['route']['home'], { replace: true })
+    if (appLanguage) {
+      const previousLng = i18n.language;
+      let newLng = appLanguage;
+
+      // FIX: setup language switching per URI, put all URIs to one array, each row having language id 
+      // TODO OLD: check if URI is in another language before setting new language
+
+      try {
+        const tPrevious = i18n.getDataByLanguage(previousLng)['global'];
+        const t = i18n.getDataByLanguage(newLng)['global'];
+        const routesObjPrev = tPrevious['router']['routes'];
+        const routesObj = t['router']['routes'];
+
+        // if (routesObj)
+
+        // var routesKeysArr = Object.keys(routesObj).map((key) => key);
+        const routesArrayPrev = Object.keys(routesObjPrev).map((key) => [key, routesObjPrev[key]]);
+        const routesArray = Object.keys(routesObj).map((key) => [key, routesObj[key]]);
+
+        const translatedPathnameObj = routesArrayPrev.find(route => {
+          const a = Object.keys(route).map((key) => [key, route[key]])
+          // let tKey = a[0];
+          let tVal = a[1][1];
+          // console.log(pathname, tVal, pathname.includes(tVal))
+          return pathname.includes(tVal);
+        });
+        // console.log('translatedPathnameObj', existingPathnameKey)
+        if (translatedPathnameObj) {
+          const existingPathnameKey = translatedPathnameObj[0];
+          console.log('test', existingPathnameKey)
+          // console.log(routesObj)
+
+          if (existingPathnameKey) {
+            const translatedPathname = routesArray.map((route) => {
+              const routePathnameKey = route[0];
+              const routePathnameVal = route[1];
+              return routePathnameKey === existingPathnameKey ? routePathnameVal : undefined;
+            }).filter(f => f)[0];
+
+            console.log('test2', translatedPathname)
+
+            if (translatedPathname) {
+              console.log('TEST', i18n.language, pathname, translatedPathname)
+              if (!pathname.includes(translatedPathname)) {
+                navigate(`/${translatedPathname}`, { replace: true });
+              }
+            } else {
+              console.log('404')
+              if (pathname !== '/' && pathname !== '') {
+                navigate('/');
+              }
+            }
+
+          }
+        }
+        i18n.changeLanguage(newLng);
+      } catch (error) {
+        console.error('something went wrong :(', error);
       }
+    }
+  }, [appLanguage, i18n]); // i18n.language
+
+  useEffect(() => {
+    // if (lang) {
+    //   const newRoutes = routesJSON[lang['id']];
+    //   if (routes !== newRoutes) {
+    //     setRoutes(newRoutes)
+    //     if (lang['id'] !== 'et') {
+    //       setTimeout(() => {
+    //         setLang(ET)
+    //       }, [4000])
+    //     }
+    //   }
+    // }
+    // if (appLanguage !== 'et') setTimeout(() => {
+    //   setAppLanguage('et')
+    // }, [4000])
+  }, [appLanguage]); // lang, routes
+
+  useEffect(() => {
+    console.log('hello!', pathname);
+    if (globalRoutes) {
+      const a = Object.keys(globalRoutes).map((key) => [key, globalRoutes[key]]);
+      let arr = [];
+      a.forEach((key) => {
+        Object.keys(key[1]).forEach(k => {
+          arr.push({ key: k, value: key[1][k] });
+        });
+        // console.log(pathname.includes(key))
+      });
+      console.log(arr);
     }
   }, [pathname])
 
   const HomePage = () => {
     return (
       <>
-        <h2>{lang['route_result']['home']}</h2>
-        <div>
-
-        </div>
+        <h2 className='page-title'>{t('router.result.home')}</h2>
+        <hr />
       </>
     )
   }
@@ -106,7 +187,7 @@ const App = () => {
 
     return (
       <div className='product-list-container'>
-        <h2 className='page-title'>{lang['route_result']['products']}</h2>
+        <h2 className='page-title'>{t('route_result.products')}</h2>
         <hr />
         <div className='product-list'>
           {products && products.length > 0 ? products.map((product) => {
@@ -144,36 +225,22 @@ const App = () => {
       </div>
     )
   }
-  const AboutPage = () => {
-    return (
-      <>
-        <h2 className='page-title'>{lang['route_result']['about']}</h2>
-        <hr />
-      </>
-    )
-  }
-  const LoginPage = () => {
-    return (
-      <>
-        <h2 className='page-title'>{lang['route_result']['login']}</h2>
-        <hr />
-      </>
-    )
-  }
 
   return (
     <>
       <Navbar config={config} />
-      <div className='container-main'>
-        <div className='container'>
-          <Routes>
-            <Route path={'/' + lang['route']['home']} element={<ProductsPage config={config} />} />
-            <Route path={'/' + lang['route']['products']} element={<ProductsPage config={config} />} />
-            <Route path={'/' + lang['route']['about']} element={<AboutPage />} />
-            <Route path={'/' + lang['route']['login']} element={<LoginPage />} />
-          </Routes>
+      <main>
+        <div className='container-main'>
+          <div className='container'>
+            <Routes>
+              <Route path='/' element={<HomePage config={config} />} />
+              {/* <Route path={'/' + routes['iphone']} element={<HomePage config={config} />} /> */}
+              {/* <Route path={'/' + routes['ipad']} element={<HomePage config={config} />} /> */}
+              {/* <Route path={'/' + lang['route']['login']} element={<LoginPage />} /> */}
+            </Routes>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }
