@@ -8,8 +8,7 @@
     "product-category/accessories/": "accessories",
     "product-category/campaign-products/": "campaign",
     "maintenance-and-repair-of-apple-devices/": "maintenance",
-    "device-repurchase/": "device_repurchase",
-    "apple-seadmete-rent/": "rent"
+    "device-repurchase/": "device_repurchase"
   },
   "et": {
     "toote-kategooria/iphone/": "iphone",
@@ -18,20 +17,19 @@
     "toote-kategooria/watch/": "watch",
     "toote-kategooria/other-devices/": "other_devices",
     "toote-kategooria/accessories/": "accessories",
-    "maintenance-and-repair-of-apple-devices/": "maintenance",
+    "apple-seadmete-hooldus-ja-remont/": "maintenance",
     "seadmete-tagasiost/": "device_repurchase",
     "apple-seadmete-rent/": "rent"
   },
   "ru": {
-    "product-cat/iphone-ru/": "iphone",
-    "product-cat/ipad-ru/": "ipad",
-    "product-cat/mac-ru/": "mac",
-    "product-cat/watch-ru/": "watch",
-    "product-category/other-devices/": "other_devices",
-    "product-cat/accessories/": "accessories",
-    "product-cat/campaign-products/": "campaign",
-    "maintenance-and-repair-of-apple-devices/": "maintenance",
-    "device-repurchase/": "device_repurchase",
-    "apple-seadmete-rent/": "rent"
+    "product-category/iphone-ru/": "iphone",
+    "product-category/ipad-ru/": "ipad",
+    "product-category/mac-ru/": "mac",
+    "product-category/watch-ru/": "watch",
+    "product-category/drugie-ustrojstva/": "other_devices",
+    "product-category/dopolnitelnoe-oborudovanie/": "accessories",
+    "product-category/tovary-kampanii/": "campaign",
+    "obsluzhivanie-i-remont-ustrojstv-apple/": "maintenance",
+    "obratnaya-pokupka-ustrojstv/": "device_repurchase"
   }
 }

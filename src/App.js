@@ -62,15 +62,10 @@ const jsonToObjArray = (array, sortingArr, excludeArray) => {
   return fields
 }
 
-// const { param1, param2 } = Object.fromEntries(new URLSearchParams(location.search));
-// console.log("YES!!!", param1, param2);
-
 const App = () => {
   const [t, i18n] = useTranslation("global");
   const [appLanguage, setAppLanguage] = useState(i18n.language)
-  // const [lang, setLang] = useState(EN);
   const [products, setProducts] = useState(productsData);
-  // const [routes, setRoutes] = useState({});
 
   const location = useLocation();
   const { hash, pathname, search } = location;
@@ -79,13 +74,25 @@ const App = () => {
 
   const config = { products, setProducts, pathname, navigate };
 
+  const getRoutesArrayFromGlobalRoutes = (globalRoutes) => {
+    const routesArray = Object.keys(globalRoutes).map((key) => [key, globalRoutes[key]]);
+    let routes = [];
+    routesArray.forEach((key) => {
+      Object.keys(key[1]).forEach(k => {
+        routes.push({ lang: key[0], key: k, value: key[1][k] });
+      });
+    });
+    return routes;
+  }
+
+  const findRouteByPath = (routes, path) => {
+    return routes.find(r => path.includes(r.key) || path.includes(r.key.slice(0, r.key.length - 1)));
+  }
+
   useEffect(() => {
     if (appLanguage) {
       const previousLng = i18n.language;
       let newLng = appLanguage;
-
-      // FIX: setup language switching per URI, put all URIs to one array, each row having language id 
-      // TODO OLD: check if URI is in another language before setting new language
 
       try {
         const tPrevious = i18n.getDataByLanguage(previousLng)['global'];
@@ -93,24 +100,21 @@ const App = () => {
         const routesObjPrev = tPrevious['router']['routes'];
         const routesObj = t['router']['routes'];
 
-        // if (routesObj)
-
-        // var routesKeysArr = Object.keys(routesObj).map((key) => key);
         const routesArrayPrev = Object.keys(routesObjPrev).map((key) => [key, routesObjPrev[key]]);
         const routesArray = Object.keys(routesObj).map((key) => [key, routesObj[key]]);
 
+        const path = pathname.slice(1);
+
         const translatedPathnameObj = routesArrayPrev.find(route => {
-          const a = Object.keys(route).map((key) => [key, route[key]])
-          // let tKey = a[0];
+          const a = Object.keys(route).map((key) => [key, route[key]]);
           let tVal = a[1][1];
-          // console.log(pathname, tVal, pathname.includes(tVal))
-          return pathname.includes(tVal);
+          // r.key || path == r.key.slice(0, r.key.length - 1)
+          return path == tVal || path == tVal.slice(0, tVal.length - 1); //pathname.includes(tVal);
         });
-        // console.log('translatedPathnameObj', existingPathnameKey)
+
         if (translatedPathnameObj) {
           const existingPathnameKey = translatedPathnameObj[0];
-          console.log('test', existingPathnameKey)
-          // console.log(routesObj)
+          console.log('test', translatedPathnameObj)
 
           if (existingPathnameKey) {
             const translatedPathname = routesArray.map((route) => {
@@ -123,8 +127,8 @@ const App = () => {
 
             if (translatedPathname) {
               console.log('TEST', i18n.language, pathname, translatedPathname)
-              if (!pathname.includes(translatedPathname)) {
-                navigate(`/${translatedPathname}`, { replace: true });
+              if (!pathname.includes(translatedPathname)) { // 
+                // navigate(`/${translatedPathname}`, { replace: true });
               }
             } else {
               console.log('404')
@@ -140,44 +144,33 @@ const App = () => {
         console.error('something went wrong :(', error);
       }
     }
-  }, [appLanguage, i18n]); // i18n.language
+  }, [appLanguage, i18n]);
 
+  /*
+  syncronize navigation menu 
+  with URL path
+  */
   useEffect(() => {
-    // if (lang) {
-    //   const newRoutes = routesJSON[lang['id']];
-    //   if (routes !== newRoutes) {
-    //     setRoutes(newRoutes)
-    //     if (lang['id'] !== 'et') {
-    //       setTimeout(() => {
-    //         setLang(ET)
-    //       }, [4000])
-    //     }
-    //   }
-    // }
-    // if (appLanguage !== 'et') setTimeout(() => {
-    //   setAppLanguage('et')
+    // if (appLanguage !== 'en') setTimeout(() => {
+    //   setAppLanguage('en')
     // }, [4000])
-  }, [appLanguage]); // lang, routes
+  }, [appLanguage]);
 
   useEffect(() => {
-    console.log('hello!', pathname);
     if (globalRoutes) {
-      const a = Object.keys(globalRoutes).map((key) => [key, globalRoutes[key]]);
-      let routes = [];
-      a.forEach((key) => {
-        Object.keys(key[1]).forEach(k => {
-          routes.push({lang: key[0], key: k, value: key[1][k] });
-        });
-        // console.log(pathname.includes(key))
-      });
+      let routes = getRoutesArrayFromGlobalRoutes(globalRoutes);
       console.log(routes);
-      const findRouteByPathnameResult = routes.find(r => pathname.includes(r.key) || pathname.includes(r.key.slice(0, r.key.length-1)));
-      if (findRouteByPathnameResult) {
-        const { lang, value } = findRouteByPathnameResult;
-        console.log('findRouteByPathname', lang, value);
+      const foundRoute = findRouteByPath(routes, pathname);
+      if (foundRoute) {
+        const { lang, key, value } = foundRoute;
+        console.log('findRouteByPathname', lang, key, value);
+        navigate(key)
         i18n.changeLanguage(lang);
       } else {
-        console.log('findRouteByPathname', '/');
+        if (pathname != '/') {
+          console.log('findRouteByPathname', '404 Not Found.');
+          navigate('/')
+        }
       }
     }
   }, [pathname])
@@ -190,6 +183,7 @@ const App = () => {
       </>
     )
   }
+
   const ProductsPage = ({ config }) => {
     const { products, setProducts } = config;
 
@@ -203,7 +197,6 @@ const App = () => {
             const images = product['images'];
             const fieldQuery = ['Name', 'Short name'];
             const fields = jsonToObjArray(json1, fieldQuery);
-            // const images = jsonToObjArray(json2, []);
 
             return (
               <div className='product-card'>
@@ -217,16 +210,6 @@ const App = () => {
                   </div>
                 </div>
               </div>
-              // <div>
-              //   {fields.map((field, key) => {
-              //     return (
-              //       <div key={key} style={{ paddingBottom: '2px' }}>
-              //         {/* {field.key}:<br /> */}
-              //         {/* {field.value}<br /> */}
-              //       </div>
-              //     )
-              //   })}
-              // </div>
             )
           }) : <h4>No Products :(</h4>}
         </div>

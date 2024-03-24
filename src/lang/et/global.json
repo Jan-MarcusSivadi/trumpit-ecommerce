@@ -32,12 +32,9 @@
       "watch": "toote-kategooria/watch/",
       "other_devices": "toote-kategooria/other-devices/",
       "accessories": "toote-kategooria/accessories/",
-      "maintenance": "maintenance-and-repair-of-apple-devices/",
+      "maintenance": "apple-seadmete-hooldus-ja-remont/",
       "device_repurchase": "seadmete-tagasiost/",
-      "rent": "apple-seadmete-rent/",
-      "products": "produktid",
-      "about": "meist",
-      "login": "sisene"
+      "rent": "apple-seadmete-rent/"
     }
   }
 }

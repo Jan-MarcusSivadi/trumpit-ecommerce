@@ -4,6 +4,8 @@ import { Outlet, Link } from 'react-router-dom'
 import logo from '../assets/logo-high-res.svg'
 import cartIcon from '../assets/shopping_cart.svg'
 
+import globalRoutes from '../lang/global_routes.json'
+
 const Navbar = ({ config }) => {
     const [t, i18n] = useTranslation("global");
 
@@ -12,25 +14,43 @@ const Navbar = ({ config }) => {
 
     const { pathname, navigate } = config;
 
+    const getRoutesArrayFromGlobalRoutes = (globalRoutes) => {
+        const routesArray = Object.keys(globalRoutes).map((key) => [key, globalRoutes[key]]);
+        let routes = [];
+        routesArray.forEach((key) => {
+            Object.keys(key[1]).forEach(k => {
+                routes.push({ lang: key[0], key: k, value: key[1][k] });
+            });
+        });
+        return routes;
+    }
+
+    const findRouteByKey = (routes, path) => {
+        return routes.find(r => path == r.key || path == r.key.slice(0, r.key.length - 1));
+        //OLD: routerMenu.find(r => path == r.route || path == r.route.slice(0, r.route.length - 1));
+    }
+
     /* 
     syncronize navigation menu 
     with URL path
     */
     useEffect(() => {
         const path = pathname.slice(1);
-        const found = routerMenu.find(r => r.route === path);
+        let routes = getRoutesArrayFromGlobalRoutes(globalRoutes);
+        const found = findRouteByKey(routes, path);
         const fallbackPath = routerMenu[0].route;
 
         if (found) {
-            if (menuActive !== found.route) setMenuActive(found.route);
+            if (menuActive !== found.key) {
+                setMenuActive(found.key);
+            }
             return
         } else {
-            setMenuActive(fallbackPath)
+            setMenuActive(fallbackPath);
         }
     }, [pathname, menuActive]); // routes, pathname, menuActive
 
     const returnMenuHr = (string) => {
-        // <hr className={`hr-anim`} />
         return (menuSelected === string || menuActive === string) ? (
             <div className='abs-container'>
                 <hr className={`hr-anim2`} />
@@ -61,27 +81,31 @@ const Navbar = ({ config }) => {
     }
 
     const getRouteKey = (id) => {
-        // const result = t(id);
-        // return i18n.exists(id) ? t(id) : null;
         const arr = id.split('.');
-        const navKey = arr[arr.length - 1];
-        const foundVal = i18n.getDataByLanguage(i18n.language)['global']['router']['routes'][navKey]
-        // console.log(id, foundVal)
-        return foundVal; // i18n.getFixedT('et', null, id); //i18n.exists(i18next.getFixedT(null, null, id));
+        const key = arr[arr.length - 1];
+        const value = i18n.getDataByLanguage(i18n.language)['global']['router']['routes'][key];
+        return value;
+    }
+
+    const getNavRouteKey = (id) => {
+        const arr = id.split('.');
+        const key = arr[arr.length - 1];
+        const value = i18n.getDataByLanguage(i18n.language)['global']['nav'][key];
+        return value;
     }
 
     const routerMenu = [
         { route: '/', element: (to, key) => routeElement(t('nav.home'), to, key) },
-        { route: getRouteKey('router.routes.iphone'), element: (to, key) => routeElement(t('nav.iphone'), to, key) },
-        { route: getRouteKey('router.routes.ipad'), element: (to, key) => routeElement(t('nav.ipad'), to, key) },
-        { route: getRouteKey('router.routes.mac'), element: (to, key) => routeElement(t('nav.mac'), to, key) },
-        { route: getRouteKey('router.routes.watch'), element: (to, key) => routeElement(t('nav.watch'), to, key) },
-        { route: getRouteKey('router.routes.other_devices'), element: (to, key) => routeElement(t('nav.other_devices'), to, key) },
+        { route: getRouteKey('router.routes.iphone'), element: (to, key) => routeElement(getNavRouteKey('nav.iphone'), to, key) },
+        { route: getRouteKey('router.routes.ipad'), element: (to, key) => routeElement(getNavRouteKey('nav.ipad'), to, key) },
+        { route: getRouteKey('router.routes.mac'), element: (to, key) => routeElement(getNavRouteKey('nav.mac'), to, key) },
+        { route: getRouteKey('router.routes.watch'), element: (to, key) => routeElement(getNavRouteKey('nav.watch'), to, key) },
+        { route: getRouteKey('router.routes.other_devices'), element: (to, key) => routeElement(getNavRouteKey('nav.other_devices'), to, key) },
         { route: getRouteKey('router.routes.accessories'), element: (to, key) => routeElement(t('nav.accessories'), to, key) },
-        { route: getRouteKey('router.routes.campaign'), element: (to, key) => routeElement(t('nav.campaign'), to, key) },
-        { route: getRouteKey('router.routes.device_repurchase'), element: (to, key) => routeElement(t('nav.device_repurchase'), to, key) },
-        { route: getRouteKey('router.routes.maintenance'), element: (to, key) => routeElement(t('nav.maintenance'), to, key) },
-        { route: getRouteKey('router.routes.rent'), element: (to, key) => routeElement(t('nav.rent'), to, key) },
+        { route: getRouteKey('router.routes.campaign'), element: (to, key) => routeElement(getNavRouteKey('nav.campaign'), to, key) },
+        { route: getRouteKey('router.routes.device_repurchase'), element: (to, key) => routeElement(getNavRouteKey('nav.device_repurchase'), to, key) },
+        { route: getRouteKey('router.routes.maintenance'), element: (to, key) => routeElement(getNavRouteKey('nav.maintenance'), to, key) },
+        { route: getRouteKey('router.routes.rent'), element: (to, key) => routeElement(getNavRouteKey('nav.rent'), to, key) },
     ]
 
     return (

@@ -34,11 +34,7 @@
       "accessories": "product-category/accessories/",
       "campaign": "product-category/campaign-products/",
       "maintenance": "maintenance-and-repair-of-apple-devices/",
-      "device_repurchase": "device-repurchase/",
-      "rent": "apple-seadmete-rent/",
-      "products": "produktid",
-      "about": "meist",
-      "login": "sisene"
+      "device_repurchase": "device-repurchase/"
     }
   }
 }
