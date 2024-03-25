@@ -151,7 +151,7 @@ const Navbar = ({ config }) => {
                         <div className="mini-cart">
                             <p>Ostukorv 0€ (0)</p>
                             <div className="mini-cart-button">
-                                <a href="https://upgreat.ee/kassa/" className="button button-small">Maksa</a>
+                                <a href="https://upgreat.ee/kassa/" className="button button-fill button-small">Maksa</a>
                             </div>
                         </div>
                     </div>

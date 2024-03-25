@@ -183,8 +183,31 @@ const App = () => {
   const HomePage = () => {
     return (
       <>
-        <h3 className='page-title'>{t('router.result.home')}</h3>
-        <hr />
+        {/* <h3 className='page-title'>{t('router.result.home')}</h3> */}
+        <section className="hero">
+          <div className="max-width">
+            <div className="slider">
+              <div className="slider-hero">
+                <div className="hero-slide-left">
+                  <div className="hero-slide-info">
+                    <h1>
+                      <span><strong>MacBookid</strong></span>
+                      <span>poolmuidu</span>
+                    </h1>
+                    <h4><strong className="important-text">Kõik</strong> 2017 ja vanemad <strong>MacBookid -50%</strong></h4>
+                    <a href="https://upgreat.ee/tootekategooria/kampaaniatooted/" className="button button-outline button-md">
+                      <span>Tutvu valikuga</span>
+                    </a>
+                  </div>
+                </div>
+                <div className="hero-slide-right">
+                  <div className="hero-slide-image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </>
     )
   }
@@ -226,13 +249,13 @@ const App = () => {
     <>
       {navLoaded && <Navbar config={config} />}
       <main>
-        <div className='container-main'>
+        <Routes>
+          <Route path='/' element={<HomePage config={config} />} />
+        </Routes>
+        {/* <div className='container-main'>
           <div className='container'>
-            <Routes>
-              <Route path='/' element={<HomePage config={config} />} />
-            </Routes>
           </div>
-        </div>
+        </div> */}
       </main>
     </>
   )
