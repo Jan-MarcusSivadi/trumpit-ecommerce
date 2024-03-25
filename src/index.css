@@ -4,22 +4,26 @@
   margin: 0;
   padding: 0;
   min-width: 0;
-  min-height: 0;
   box-sizing: border-box;
 
-  -webkit-user-select: none; /* Safari */
+  /* Safari
+  -webkit-user-select: none;
   -webkit-user-drag: none;
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  IE 10 and IE 11
+  -ms-user-select: none;
+  Standard syntax 
+  user-select: none;*/
 
   --primary-color: #d0ee8f;
   --primary-text-color: #102a26;
-  --primary-text-active-color: #102a263a;
+  --primary-text-hover-color: #102a263a;
+  --primary-text-active-color: #102a2673;
   --primary-active-color: #0d95e4;
 
-  --secondary-color: #f3f3f5;
-  --secondary-active-color: #f3f3f3;
+  --secondary-color: #f4f4f5;
+  /* --secondary-color: #f3f3f5; */
   /* --secondary-color: #f0f0f2; */
+  --secondary-active-color: #f3f3f3;
   --nav-underline-active: #132a2698;
   --nav-menu-color: #132a26;
 
@@ -32,14 +36,20 @@
 }
 
 body {
-  margin: 0;
+  /* margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   font-family: "Mulish", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--secondary-color);
+  -moz-osx-font-smoothing: grayscale; */
+  /* background-color: var(--secondary-color); */
+
+  color: #131218;
+  font-weight: 400;
+  font-size: 2rem;
+  font-family: "Mulish";
+  line-height: 1;
 }
 
 code {

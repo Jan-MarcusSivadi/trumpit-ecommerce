@@ -66,6 +66,7 @@ const App = () => {
   const [t, i18n] = useTranslation("global");
   const [appLanguage, setAppLanguage] = useState(i18n.language)
   const [products, setProducts] = useState(productsData);
+  const [navLoaded, setNavLoaded] = useState(false);
 
   const location = useLocation();
   const { hash, pathname, search } = location;
@@ -164,12 +165,16 @@ const App = () => {
       if (foundRoute) {
         const { lang, key, value } = foundRoute;
         console.log('findRouteByPathname', lang, key, value);
-        navigate(key)
-        i18n.changeLanguage(lang);
+        i18n.changeLanguage(lang).then(() => {
+          navigate(key);
+          setNavLoaded(true);
+        });
       } else {
         if (pathname != '/') {
           console.log('findRouteByPathname', '404 Not Found.');
-          navigate('/')
+          navigate('/');
+        } else {
+          setNavLoaded(true);
         }
       }
     }
@@ -178,7 +183,7 @@ const App = () => {
   const HomePage = () => {
     return (
       <>
-        <h2 className='page-title'>{t('router.result.home')}</h2>
+        <h3 className='page-title'>{t('router.result.home')}</h3>
         <hr />
       </>
     )
@@ -219,7 +224,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar config={config} />
+      {navLoaded && <Navbar config={config} />}
       <main>
         <div className='container-main'>
           <div className='container'>
