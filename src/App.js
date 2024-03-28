@@ -188,20 +188,22 @@ const App = () => {
           <div className="max-width">
             <div className="slider">
               <div className="slider-hero">
-                <div className="hero-slide-left">
-                  <div className="hero-slide-info">
-                    <h1>
-                      <span><strong>MacBookid</strong></span>
-                      <span>poolmuidu</span>
-                    </h1>
-                    <h4><strong className="important-text">Kõik</strong> 2017 ja vanemad <strong>MacBookid -50%</strong></h4>
-                    <a href="https://upgreat.ee/tootekategooria/kampaaniatooted/" className="button button-outline button-md">
-                      <span>Tutvu valikuga</span>
-                    </a>
+                <div className="slider-content">
+                  <div className="hero-slide-left">
+                    <div className="hero-slide-info">
+                      <h1>
+                        <span><strong>{t('pages.home.hero.title-1')}</strong></span>
+                        <span>{t('pages.home.hero.title-2')}</span>
+                      </h1>
+                      <h4><strong>{t('pages.home.hero.subtitle-1')}</strong> {t('pages.home.hero.subtitle-2')} <strong>{t('pages.home.hero.subtitle-3')}</strong></h4>
+                      <a href="https://upgreat.ee/tootekategooria/kampaaniatooted/" className="button button-outline button-md">
+                        <span className="more-link">{t('pages.home.hero.btn-cta')}</span>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="hero-slide-right">
-                  <div className="hero-slide-image">
+                  <div className="hero-slide-right">
+                    <div className="hero-slide-image">
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,20 @@
 {
   "id": "ru",
   "nav": {
+    "contacts": {
+      "week": "Пн-Bc 10-19",
+      "phone": "+372 600 1449"
+    },
+    "additional": {
+      "appearance": "Категории качества",
+      "about-us": "Команда",
+      "hirepurchase": "Рассрочка",
+      "business": "Upgreat для бизнеса",
+      "contact": "Контакт",
+      "news": "Новости"
+    },
+    "cart": "Корзина",
+    "cart-pay": "Oплатить",
     "home": "Главная",
     "iphone": "iPhone",
     "ipad": "iPad",
@@ -17,6 +31,18 @@
     "login": "Login",
     "shopping_cart": "Cart"
   },
+  "pages": {
+    "home": {
+      "hero": {
+        "title-1": "MacBook",
+        "title-2": "за полцены",
+        "subtitle-1": "Все",
+        "subtitle-2": "2017 года и старше",
+        "subtitle-3": "Макбуки -50%",
+        "btn-cta": "Посмотреть товары"
+      }
+    }
+  },
   "router": {
     "result": {
       "home": "Home",
@@ -25,6 +51,13 @@
       "login": "Login"
     },
     "routes": {
+      "appearance": "grade-ru/",
+      "about-us": "about-the-company-ru/",
+      "hirepurchase": "rassrochka/",
+      "business": "upgreat-for-business-customer-ru/",
+      "contact": "contact-ru/",
+      "news": "novosti/",
+      "cart-pay": "zakaz/",
       "iphone": "product-category/iphone-ru/",
       "ipad": "product-category/ipad-ru/",
       "mac": "product-category/mac-ru/",

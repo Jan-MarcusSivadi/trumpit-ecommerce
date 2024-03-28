@@ -1,6 +1,20 @@
 {
   "id": "en",
   "nav": {
+    "contacts": {
+      "week": "Mon-Sun 10-19",
+      "phone": "+372 600 1120"
+    },
+    "additional": {
+      "appearance": "Appearance categories",
+      "about-us": "About the company",
+      "hirepurchase": "Hire purchase",
+      "business": "Upgreat for business customer",
+      "contact": "Contact",
+      "news": "News"
+    },
+    "cart": "Cart",
+    "cart-pay": "Pay Now",
     "home": "Home",
     "iphone": "iPhone",
     "ipad": "iPad",
@@ -18,6 +32,18 @@
     "login": "Sisene",
     "shopping_cart": "Ostukorv"
   },
+  "pages": {
+    "home": {
+      "hero": {
+        "title-1": "MacBooks",
+        "title-2": "at half price",
+        "subtitle-1": "All",
+        "subtitle-2": "2017 and older",
+        "subtitle-3": "MacBooks -50%",
+        "btn-cta": "Shop now"
+      }
+    }
+  },
   "router": {
     "result": {
       "home": "Home",
@@ -26,6 +52,13 @@
       "login": "Login"
     },
     "routes": {
+      "appearance": "appearance-categories/",
+      "about-us": "about-the-company/",
+      "hirepurchase": "hire-purchase/",
+      "business": "upgreat-for-business-customer/",
+      "contact": "contact/",
+      "news": "news/",
+      "cart-pay": "checkout-2/",
       "iphone": "product-category/iphone-en/",
       "ipad": "product-category/ipad-en/",
       "mac": "product-category/mac-en/",

@@ -1,5 +1,12 @@
 {
   "en": {
+    "appearance-categories/": "appearance",
+    "about-the-company/": "about-us",
+    "hire-purchase/": "hirepurchase",
+    "upgreat-for-business-customer/": "business",
+    "contact/": "contact",
+    "news/": "news",
+    "checkout-2/": "cart-pay",
     "product-category/iphone-en/": "iphone",
     "product-category/ipad-en/": "ipad",
     "product-category/mac-en/": "mac",
@@ -11,6 +18,13 @@
     "device-repurchase/": "device_repurchase"
   },
   "et": {
+    "grade/": "appearance",
+    "ettevottest/": "about-us",
+    "jarelmaks/": "hirepurchase",
+    "upgreat-for-business/": "business",
+    "kontakt/": "contact",
+    "uudised/": "news",
+    "kassa/": "cart-pay",
     "toote-kategooria/iphone/": "iphone",
     "toote-kategooria/ipad/": "ipad",
     "toote-kategooria/mac/": "mac",
@@ -22,6 +36,13 @@
     "apple-seadmete-rent/": "rent"
   },
   "ru": {
+    "grade-ru/": "appearance",
+    "about-the-company-ru/": "about-us",
+    "rassrochka/": "hirepurchase",
+    "upgreat-for-business-customer-ru/": "business",
+    "contact-ru/": "contact",
+    "novosti/": "news",
+    "zakaz/": "cart-pay",
     "product-category/iphone-ru/": "iphone",
     "product-category/ipad-ru/": "ipad",
     "product-category/mac-ru/": "mac",

@@ -135,23 +135,25 @@ const Navbar = ({ config }) => {
                 <div className="header-main-top">
                     <div className="main-top-container">
                         <div className="contacts-desktop">
-                            <p>E-P 10-19</p>
-                            <p>+372 600 1120</p>
+                            <p>{t('nav.contacts.week')}</p>
+                            <p><a href={`tel: ${t('nav.contacts.phone')}`}>{t('nav.contacts.phone')}</a></p>
                         </div>
                         <div className="additional-menu">
                             <ul className="additional-menu-container">
-                                <li><a href="https://upgreat.ee/grade/">Välimuste kategooriad</a></li>
-                                <li><a href="https://upgreat.ee/ettevottest/">Ettevõttest</a></li>
-                                <li><a href="https://upgreat.ee/jarelmaks/">Järelmaks</a></li>
-                                <li><a href="https://upgreat.ee/upgreat-for-business/">Ärikliendile</a></li>
-                                <li><a href="https://upgreat.ee/kontakt/">Kontakt</a></li>
-                                <li><a href="https://upgreat.ee/uudised/">Uudised</a></li>
+                                <li><Link to={getRouteKey('router.routes.appearance')}>{t('nav.additional.appearance')}</Link></li>
+                                <li><Link to={getRouteKey('router.routes.about-us')}>{t('nav.additional.about-us')}</Link></li>
+                                <li><Link to={getRouteKey('router.routes.hirepurchase')}>{t('nav.additional.hirepurchase')}</Link></li>
+                                <li><Link to={getRouteKey('router.routes.business')}>{t('nav.additional.business')}</Link></li>
+                                <li><Link to={getRouteKey('router.routes.contact')}>{t('nav.additional.contact')}</Link></li>
+                                <li><Link to={getRouteKey('router.routes.news')}>{t('nav.additional.news')}</Link></li>
                             </ul>
                         </div>
                         <div className="mini-cart">
-                            <p>Ostukorv 0€ (0)</p>
+                            <div className="mini-cart-container">
+                                <span>{t('nav.cart')}</span> <div className="mini-cart-amount">0€ (0)</div>
+                            </div>
                             <div className="mini-cart-button">
-                                <a href="https://upgreat.ee/kassa/" className="button button-fill button-small">Maksa</a>
+                                <Link to={getRouteKey('router.routes.cart-pay')} className="button button-fill button-small">{t('nav.cart-pay')}</Link>
                             </div>
                         </div>
                     </div>
